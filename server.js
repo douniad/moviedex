@@ -3,7 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
-const MOVIEDEX = require('./moviedex.json')
+const MOVIES = require('./moviedex.json')
 
 const app = express()
 
@@ -38,12 +38,12 @@ app.get('/movie', function handleGetMovie(req, res) {
     }
    
     if (req.query.avg_vote) {
-        response = respnse.filter(movie => 
+        response = response.filter(movie => 
             Number(movie.avg_vote) >= Number(req.query.avg_vote)
         )
     }
 
-res.json(results);
+res.json(response);
 });
 
 app.use((error, req, res, next) => {
@@ -59,6 +59,6 @@ app.use((error, req, res, next) => {
 const PORT = process.env.PORT || 8000
 
 app.listen(PORT, () => {
-
+console.log('app started')
 })
 
